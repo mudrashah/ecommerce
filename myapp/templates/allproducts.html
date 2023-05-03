@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Allproducts
+{% endblock title %}
+    
+
+
+
+{% block body %}
+
+<div class="container-fluid p-3">
+<div class="row">
+    <div class="col-sm-3 ">
+        <div class="list-group">
+            <a href="/allproducts/" class="list-group-item list-group-item-action bg-secondary text-light">
+                <strong>All Products</strong>
+            </a>
+            <div class="dropdown">
+              {% for cats in all_categories %}
+                
+                <form action="">
+                    
+                    <input type="text" hidden name="catesid" value="{{cats.id}}" id="">
+                    
+                        <button type="submit" class="btn btn-primary dropdown-toggle list-group-item list-group-item-action" data-toggle="dropdown">{{cats.name}}</button>
+
+                        <ul class="dropdown-content">
+                            {% for i in sub %}
+                              
+                              {% if cats.id == i.mcate.id %}
+                                  
+                             
+                            <li><a class="dropdown-item" href="/allproducts?subid={{i.id}}"> {{i.name}} </a></li>
+                            {% endif %}
+                                  
+                            {% endfor %}
+                        </ul>
+           
+           
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 col-sm-9">
+        <div class="row ">
+            <div class="col-sm-12 bg-secondary p-2" style="border-radius: 4px;">
+                <form action="">
+                    <div class="row">
+                        
+                           
+                        <div class="col-lg-3 col-sm-12">
+                                <div class="form-group">
+                                <input type="text" name="pordname" placeholder="Product name" class="form-control" id="exampleInputPassword1"> 
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-sm-12">
+                            <div class="form-group">
+                                <button class="btn btn-warning" type="submit"><script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/pvbutfdk.json"
+                                        trigger="loop"
+                                        colors="primary:#121331"
+                                        state="hover"
+                                        style="width:25px;height:25px">
+                                    </lord-icon><i class="fas fa-filter"></i></button>
+                            </div>  
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            {% for prod in all_products %}
+            <div class="col-lg-4 col-sm-12  p-2  ">
+                <div class="card" >
+                    <a href="/proinfo/{{prod.id}}">
+                    <img style="height: 500px;" src="{{prod.image.url}}" class="card-img-top p-0 border" alt="...">
+                </a>
+                    <div class="card-body ">
+                        <h5 class="card-title">{{prod.name}} </h5>
+                        <p class="card-text text-center">
+                            <div class="row">
+                                <h5 class="ml-2"><strong>₹{{prod.sell_price}} &   ₹{{prod.discount}} Off</strong></h5>
+                                <h6 class="ml-2 mb-1"><s>₹{{prod.og_price}}</s></h6>
+                            </div>
+                            
+                        </p>
+                        <a href="/addtocart/{{prod.id}}/" class="btn btn-block btn-warning"><h5><i class="fas fa-cart-plus"></i> <script src="https://cdn.lordicon.com/lusqsztk.js"></script>Cart 
+                            <lord-icon
+                                src="https://cdn.lordicon.com/aoggitwj.json"
+                                trigger="loop"
+                                style="width:32px;height:32px">
+                            </lord-icon></h5></a>
+
+                        
+                        <a href="/addtowish/{{prod.id}}/" class="btn btn-block btn-warning"><h5><i class="fas fa-cart-plus"></i><script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/kkcllwsu.json"
+                                trigger="loop"
+                                style="width:32px;height:32px">
+                            </lord-icon></h5></a>
+                    </div>
+               
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+    
+
+{% endblock body %}
+    

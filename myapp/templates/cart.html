@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Cart  
+{% endblock title %}
+
+
+{% block body %}
+        <div class="container-fluid p-3">
+
+            <div class="row">
+              <div class="col-sm-12 m-0 p-0 ">
+                <h2 class="display-4 p-1 border text-center text-light bg-secondary">Cart</h2>
+              </div>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 table-responsive ">
+          <table class="table   ">
+            <thead>
+              <tr>
+                <th scope="col">Delete</th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+    
+              {% for i in cart_items %}
+              <tr>
+                <td><a class="btn " href="/delete/{{i.id}}">
+                    <h4><script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                      <lord-icon
+                          src="https://cdn.lordicon.com/dovoajyj.json"
+                          trigger="loop"
+                          style="width:25px;height:25px">
+                      </lord-icon></h4>
+                  </a></td>
+                <th><img style="height: 80px;" src="{{i.product.image.url}}" alt=""></th>
+                <td>{{i.product.name}}</td>
+                <td>{{i.product.sell_price}}</td>
+                <td>
+                  <a class="text-dark mr-2" href="/plus/{{i.id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                  </svg></a>
+                  {{i.quantity}}
+                  <a class="text-dark ml-2" href="/minus/{{i.id}}/"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+                  </svg></a>
+    
+                </td>
+                <td>{{i.prod_total}}</td>
+                {% empty %}
+                <td colspan="6">
+    
+                  
+                  <div class="d-flex justify-content-center">
+                    <img src="{% static 'cart1.jpg' %}" alt="">
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <a class="btn btn-warning" href="/allproducts/">Shop Now</a>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    
+
+
+      <div class="row">
+        <div class="col-sm-12 p-2   text-center">
+          <a href="/clearcart/" class="btn btn-lg btn-secondary ml-2" type="submit"> Clear Cart</a>
+        </div>
+      </div>
+
+<br>
+
+
+{% if sub_total %}
+    
+  
+    
+<div class="row d-flex justify-content-end p-2">
+  <div class="col-sm-12 col-lg-15 ">
+    <ul class="list-group ">
+      <li class="list-group-item  text-light bg-secondary text-light">
+        <h4><strong>Cart Totals</strong></h4>
+      </li>
+
+      {% for i in cart_items %}
+      <li class="list-group-item d-flex justify-content-end border-dark">{{i.product.name|truncatechars:10}} *
+        {{i.quantity}} = {{i.prod_total}}</li>
+      {% endfor %}
+      <li class="list-group-item d-flex justify-content-end border-dark ">
+
+
+        <h6><strong>Sub Total = ₹ {{sub_total}}</strong></h6>
+      </li>
+      <li class="list-group-item d-flex justify-content-end border-dark">Shipping Charge (Fix) = ₹ {{ship_charge}}
+      </li>
+      <li class="list-group-item d-flex justify-content-end border-dark">GST (10%) = ₹ {{GST}} </li>
+      <li class="list-group-item d-flex justify-content-end border-dark bg-light ">
+        <h5><strong>Grand Total = ₹ {{grand_total}}</strong></h5>
+      </li>
+      <li class="list-group-item d-flex justify-content-end bg-secondary"><a href="/checkout/" class="btn btn-lg btn-block btn-warning"><strong>Place Order<script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+          <lord-icon
+              src="https://cdn.lordicon.com/zwhkzizg.json"
+              trigger="loop"
+              style="width:32px;height:32px">
+          </lord-icon></strong></a>
+      </li>
+     
+    </ul>
+  </div>
+</div>
+{% endif %}
+<br>
+
+
+
+
+{% endblock body %}
+    

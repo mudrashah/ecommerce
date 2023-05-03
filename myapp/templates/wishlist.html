@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Cart  
+{% endblock title %}
+
+
+{% block body %}
+        <div class="container-fluid p-3">
+
+            <div class="row">
+              <div class="col-sm-12 m-0 p-0 ">
+                <h2 class="display-4 p-1 border text-center text-light bg-secondary">wishlist</h2>
+              </div>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 table-responsive ">
+          <table class="table   ">
+            <thead>
+              <tr>
+                <th scope="col">Delete</th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+    
+              {% for i in cart_items %}
+              <tr>
+                <td><a class="btn " href="/del/{{i.id}}">
+                  <h4><script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/dovoajyj.json"
+                        trigger="loop"
+                        style="width:25px;height:25px">
+                    </lord-icon></h4>
+                </a></td>
+                <th><img style="height: 80px;" src="{{i.product.image.url}}" alt=""></th>
+                <td>{{i.product.name}}</td>
+                <td>{{i.product.sell_price}}</td>
+<td> <div class="d-flex justify-content-center">
+  <a class="btn btn-warning" href="/addtocart/{{i.product.id}}/">Add to cart</a>
+</div></td>
+
+                
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    
+
+
+      <div class="row">
+        <div class="col-sm-12 p-2   text-center">
+          <a href="/clearwish/" class="btn btn-lg btn-danger ml-2" type="submit"> Clear Cart</a>
+        </div>
+        <div class="d-flex justify-content-center">
+          <a class="btn btn-warning" href="/allproducts/">Shop Now</a>
+        </div>
+      </div>
+
+
+{% endblock body %}
+    

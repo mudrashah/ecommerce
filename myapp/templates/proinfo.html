@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+View Product
+{% endblock title %}
+
+
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-5 p-5">
+            <img  style="height: 400px;" src="{{get_product.image.url}}" class="img-fluid img-thumbnail  " alt="Responsive image">
+            </div>
+        <div class="col-7 p-5">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Product Name:</th>
+                        <td>{{get_product.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Price:</th>
+                        <td>{{get_product.og_price}}</td>
+                    </tr>
+                    <tr>
+                        <th>Discount:</th>
+                        <td>{{get_product.discount}}%</td>
+                    </tr>
+                    <tr>
+                        <th>You Save:</th>
+                        <td>{{get_product.discounted_price}}</td>
+                      </tr>
+                      
+                       <tr>
+                    
+                      
+                 
+                        
+                        <td>
+                          <a class="btn btn-warning" href="/addtocart/{{get_product.id}}/"><strong>Add to Cart</strong></a>
+                        </td>
+              
+                         <td><a class="btn btn-primary" href="/home/"><strong>Go to Shop</strong></a></td>
+                      </tr>
+                      
+                </tbody>
+            </table>
+        </div>    
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock body %}
